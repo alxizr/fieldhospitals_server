@@ -48,7 +48,6 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
       });
     } else {
       //no user stored in the session
-      console.log("no user object");
       throw new Error("Something went wrong. Could not find user object...");
     }
   } catch (error) {
