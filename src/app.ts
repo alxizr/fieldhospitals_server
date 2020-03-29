@@ -6,6 +6,7 @@ import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
 import errorHandler from "errorhandler";
+import multer from "multer";
 
 import {
   ENV_APP_PORT_REST,
@@ -20,8 +21,6 @@ import {
 
 import { auth } from "./routes/session.controller";
 import { hotels } from "./routes/hotel.controller";
-import { tasks } from "./routes/task.controller";
-import { logs } from "./routes/operationlog.controller";
 import { admin } from "./routes/admin.controller";
 
 const PORT = ENV_APP_PORT_REST;

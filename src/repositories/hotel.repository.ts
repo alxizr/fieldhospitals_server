@@ -1,4 +1,5 @@
 import { NextFunction, Response, Request } from "express";
+import multer from "multer";
 
 /**
  *
@@ -50,9 +51,53 @@ const editHotelGuest = async (
   return await res.send(`edit one guest ${req.params.id} in the hotel`);
 };
 
+// setup additional middleware or packages here
+
+const storage = multer.diskStorage({
+  //multers disk storage settings
+  destination: (req, file, cb) => {
+    cb(null, "./src/uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      "excelneedstobeconvertedtojson." +
+        file.originalname.split(".")[file.originalname.split(".").length - 1]
+    );
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, callback) => {
+    //file filter
+    if (
+      ["xls", "xlsx"].indexOf(
+        file.originalname.split(".")[file.originalname.split(".").length - 1]
+      ) === -1
+    ) {
+      return callback(new Error("Wrong extension type"));
+    }
+    callback(null, true);
+  }
+}).single("myfilenamefield");
+
+const uploadExcelFileFromHotel = () => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    return upload(req, res, err => {
+      if (err) {
+        res.json({ error_code: 1, err_desc: err });
+        return;
+      }
+      res.json({ error_code: 0, err_desc: null });
+    });
+  };
+};
+
 export const hotels = {
   getAllHotelGuests,
   getOneHotelGuest,
   addHotelGuest,
-  editHotelGuest
+  editHotelGuest,
+  uploadExcelFileFromHotel
 };

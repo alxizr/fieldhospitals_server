@@ -16,7 +16,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     req.session.user = {
       name,
       logintime: Date.now(),
-      accessroles: [] // here need to write a method that handles the roles assignment
+      accessroles: ["Hotel"] // here need to write a method that handles the roles assignment
     };
 
     return await res

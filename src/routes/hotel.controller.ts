@@ -11,19 +11,10 @@ import { Roles } from "../models/enum/Roles";
 export const hotels = Router();
 
 hotels
-  .route("")
+  .route("/excelfile")
 
-  .get(
-    authRepo.isLoggedIn,
-    authRepo.hasRole([Roles.Hotel, Roles.HotelCanRead]),
-    hotelsRepo.getAllHotelGuests
-  )
-
-  .post(
-    authRepo.isLoggedIn,
-    authRepo.hasRole([Roles.Hotel, Roles.HotelCanWrite]),
-    hotelsRepo.addHotelGuest
-  );
+  .get(hotelsRepo.uploadExcelFileFromHotel())
+  .post(hotelsRepo.uploadExcelFileFromHotel());
 
 hotels
   .route("/:id")
@@ -44,4 +35,19 @@ hotels
     authRepo.isLoggedIn,
     authRepo.hasRole([Roles.Hotel, Roles.HotelCanEdit]),
     hotelsRepo.editHotelGuest
+  );
+
+hotels
+  .route("")
+
+  .get(
+    authRepo.isLoggedIn,
+    authRepo.hasRole([Roles.Hotel, Roles.HotelCanRead]),
+    hotelsRepo.getAllHotelGuests
+  )
+
+  .post(
+    authRepo.isLoggedIn,
+    authRepo.hasRole([Roles.Hotel, Roles.HotelCanWrite]),
+    hotelsRepo.addHotelGuest
   );
