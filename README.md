@@ -13,6 +13,8 @@ this is the server api for the fields hospital project
 # TODO
 
 <ol>
+<li>Create file upload route</li>
+<br/>
 <li>Create class models</li>
 <li>Create Mongoose Schemas</li>
 <li>Create Mongoose static and memeber methods</li>
