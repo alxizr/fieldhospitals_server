@@ -6,7 +6,7 @@ import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
 import errorHandler from "errorhandler";
-import multer from "multer";
+
 
 import {
   ENV_APP_PORT_REST,

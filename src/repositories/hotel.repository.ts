@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import { uploadExcelFile } from "../utils/uploadexcel.utils";
+import { uploadExcelFile } from "../utils/excel2jsonconvertor.utils";
 /**
  *
  * @param req
