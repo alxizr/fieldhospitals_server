@@ -21,17 +21,21 @@ this is the server api for the fields hospital project
         </ul>
     </li>
     <br />
-    <strike><li>
-        handle hashing and web tokens
+    <li>
+        Security
         <ul>
-            <li>jsonwebtoken</li>
-            <li>bcrypt</li>
-            <li>passport</li>
-            <li>Sql injection</li>
-            <li>NoSql injection</li>
-            <li>XSS</li>
-            <li>HPP</li>
-            <li>Setup Rate limit</li>
+            <li>setup Web Tokens</li>
+            <li>setup Encryption</li>
+            <li>setup Strategies</li>
+          <strike>  
+            <li>setup Sessions</li>
+            <li>setup Cookies</li>
+            <li>setup Sql injection protection</li>
+            <li>setup NoSql injection protection</li>
+            <li>setup XSS protection</li>
+            <li>setup HPP protection</li>
+            <li>setup Rate limit</li>
+            <li>setup CORS</li>
         </ul>
     </li></strike>
     <br/>    

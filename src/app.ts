@@ -45,7 +45,7 @@ app.use(
   })
 ); // rate limit for all routes
 
-// setup express session - since v1.15.0 no need for cookie-parser package
+// setup express session - since v1.15.0 no need for cookie-parser package to write
 const MongoStore = connectStore(session);
 const opts: SessionOptions = {
   name: <string>SESSION_NAME,
