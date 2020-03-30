@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import { SESSION_NAME } from "../utils/secret";
+import { SESSION_NAME, COOKIE_PATH, COOKIE_DOMAIN } from "../utils/secret";
 import { Roles } from "../models/enum/Roles";
 
 /**
@@ -43,7 +43,10 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
       return await req.session.destroy(err => {
         if (err) throw err;
 
-        res.clearCookie(<string>SESSION_NAME);
+        res.clearCookie(<string>SESSION_NAME, {
+          domain: COOKIE_DOMAIN,
+          path: COOKIE_PATH
+        });
         res.send(`${user.name} logged out`);
       });
     } else {

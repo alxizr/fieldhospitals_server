@@ -18,3 +18,7 @@ export const TTL = +(process.env.TTL || 60);
 export const SESSION_NAME = process.env.SESSION_NAME;
 
 export const SESSION_SECRET = process.env.SESSION_SECRET;
+
+export const COOKIE_PATH = process.env.COOKIE_PATH;
+
+export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN;

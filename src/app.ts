@@ -2,11 +2,15 @@ import express from "express";
 import connectStore from "connect-mongo";
 import { connection, connect } from "mongoose";
 import session, { SessionOptions } from "express-session";
+import cookieParser from "cookie-parser";
 import compression from "compression";
 import helmet from "helmet";
+const xss = require("xss-clean");
+import rateLimit from "express-rate-limit";
+import hpp from "hpp";
+import sanitize from "express-mongo-sanitize";
 import cors from "cors";
 import errorHandler from "errorhandler";
-
 
 import {
   ENV_APP_PORT_REST,
@@ -16,7 +20,9 @@ import {
   CONNECTION_STRING,
   TTL,
   SESSION_NAME,
-  SESSION_SECRET
+  SESSION_SECRET,
+  COOKIE_PATH,
+  COOKIE_DOMAIN
 } from "./utils/secret";
 
 import { auth } from "./routes/session.controller";
@@ -26,8 +32,18 @@ import { admin } from "./routes/admin.controller";
 const PORT = ENV_APP_PORT_REST;
 const app = express();
 
-// setup express app to use Helmet for security
-app.use(helmet());
+// setup Security
+app.use(helmet()); // Helmet - general
+app.use(xss()); // xss-clean
+app.use(sanitize()); // prevent Sql & NoSql injections
+app.use(hpp()); // header parameters pollution
+app.set("trust proxy", 1);
+app.use(
+  rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 100
+  })
+); // rate limit for all routes
 
 // setup express session - since v1.15.0 no need for cookie-parser package
 const MongoStore = connectStore(session);
@@ -42,8 +58,8 @@ const opts: SessionOptions = {
     ttl: TTL
   }),
   cookie: {
-    path:
-      "/api" /* <--------- MUST BE SET TO THE INITIAL ROUTE PATH OF THE SERVER API JUST AS THE apiRoute is configured */,
+    domain: COOKIE_DOMAIN,
+    path: COOKIE_PATH /* <--------- MUST BE SET TO THE INITIAL ROUTE PATH OF THE SERVER API JUST AS THE apiRoute is configured */,
     secure: process.env.NODE_ENV === ENVIRONMENT_PRODUCTION,
     maxAge: TTL * 1000,
     sameSite: true,
@@ -53,16 +69,19 @@ const opts: SessionOptions = {
 };
 app.use(session(opts));
 
+// enable cookie-parser
+app.use(cookieParser());
+
 // parse request to json -- this must be here!!! do not move!!!
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// enable compression on all requests
-app.use(compression());
-
 // enable cors between client and server -- this must be here!!! do not move!!!
 app.use(cors());
 app.options("*", cors());
+
+// enable compression on all requests
+app.use(compression());
 
 // setup error handle print stack trace for development
 if (ENV_ENVIRONMENT !== ENVIRONMENT_PRODUCTION) {

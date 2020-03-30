@@ -21,14 +21,19 @@ this is the server api for the fields hospital project
         </ul>
     </li>
     <br />
-    <li>
+    <strike><li>
         handle hashing and web tokens
         <ul>
             <li>jsonwebtoken</li>
             <li>bcrypt</li>
             <li>passport</li>
+            <li>Sql injection</li>
+            <li>NoSql injection</li>
+            <li>XSS</li>
+            <li>HPP</li>
+            <li>Setup Rate limit</li>
         </ul>
-    </li>
+    </li></strike>
     <br/>    
     <li>
         MongoDB
