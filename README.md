@@ -13,7 +13,6 @@ this is the server api for the fields hospital project
 # TODO
 
 <ol>
-
 <li>
         Documentation
         <ul>
@@ -21,7 +20,6 @@ this is the server api for the fields hospital project
         </ul>
     </li>
     <br />
-
     <li>
         Routes
         <ul>
