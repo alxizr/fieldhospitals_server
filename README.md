@@ -13,6 +13,15 @@ this is the server api for the fields hospital project
 # TODO
 
 <ol>
+
+<li>
+        Documentation
+        <ul>
+            <li>setup Dcoumentation w/ Swagger API</li>
+        </ul>
+    </li>
+    <br />
+
     <li>
         Routes
         <ul>
@@ -27,7 +36,7 @@ this is the server api for the fields hospital project
             <li>setup Web Tokens</li>
             <li>setup Encryption</li>
             <li>setup Strategies</li>
-          <strike>  
+          <strike>
             <li>setup Sessions</li>
             <li>setup Cookies</li>
             <li>setup Sql injection protection</li>
@@ -38,7 +47,7 @@ this is the server api for the fields hospital project
             <li>setup CORS</li>
         </ul>
     </li></strike>
-    <br/>    
+    <br/>
     <li>
         MongoDB
         <ul>
@@ -51,4 +60,5 @@ this is the server api for the fields hospital project
     </li>
     <br />
     <li>Connect client</li>
+
 </ol>
