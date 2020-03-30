@@ -16,6 +16,18 @@ this is the server api for the fields hospital project
 <strike><li>Create file upload route</li></strike>
 <strike><li>Create converter excel 2 json</li></strike>
 <br/>
+
+<li>
+handle hashing and web tokens
+<ul>
+<li>jsonwebtoken</li>
+<li>bcrypt</li>
+<li>passport</li>
+</ul>
+
+</li>
+
+<br/>
  
 <li><strike>Create class models</strike></li>
 <li>Configure class models</li>
