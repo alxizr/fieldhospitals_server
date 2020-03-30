@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import { uploadExcelFile } from "../utils/excel2jsonconvertor.utils";
+import { convertExcel2JSON } from "../utils/excel2jsonconvertor.utils";
 /**
  *
  * @param req
@@ -57,5 +57,5 @@ export const hotels = {
   getOneHotelGuest,
   addHotelGuest,
   editHotelGuest,
-  uploadExcelFile
+  convertExcel2JSON
 };

@@ -13,7 +13,8 @@ this is the server api for the fields hospital project
 # TODO
 
 <ol>
-<li>Create file upload route</li>
+<strike><li>Create file upload route</li></strike>
+<strike><li>Create converter excel 2 json</li></strike>
 <br/>
  
 <li><strike>Create class models</strike></li>

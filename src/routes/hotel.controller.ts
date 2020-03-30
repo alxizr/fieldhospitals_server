@@ -13,10 +13,10 @@ export const hotels = Router();
 hotels
   .route("/excelfile")
 
-  .get(hotelsRepo.uploadExcelFile())
-  .put(hotelsRepo.uploadExcelFile())
-  .patch(hotelsRepo.uploadExcelFile())
-  .post(hotelsRepo.uploadExcelFile());
+  .get(hotelsRepo.convertExcel2JSON())
+  .put(hotelsRepo.convertExcel2JSON())
+  .patch(hotelsRepo.convertExcel2JSON())
+  .post(hotelsRepo.convertExcel2JSON());
 
 hotels
   .route("/:id")

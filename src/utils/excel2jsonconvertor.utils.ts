@@ -40,7 +40,7 @@ const upload = multer({
  * @description this method handles Excel (.xls, .xlsx) file uploads from the client to the server side,
  * specifically into the src/uploads folder.
  */
-export const uploadExcelFile = () => {
+export const convertExcel2JSON = () => {
   return async (req: Request, res: Response, next: NextFunction) => {
     return await upload(req, res, err => {
       if (!req.file) {
