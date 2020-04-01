@@ -22,3 +22,5 @@ export const SESSION_SECRET = process.env.SESSION_SECRET;
 export const COOKIE_PATH = process.env.COOKIE_PATH;
 
 export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN;
+
+export const JWT_SECRET = process.env.JWT_SECRET;

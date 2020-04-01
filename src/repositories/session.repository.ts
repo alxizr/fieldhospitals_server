@@ -1,5 +1,12 @@
 import { NextFunction, Response, Request } from "express";
-import { SESSION_NAME, COOKIE_PATH, COOKIE_DOMAIN } from "../utils/secret";
+import jwt from "jsonwebtoken";
+import {
+  SESSION_NAME,
+  COOKIE_PATH,
+  COOKIE_DOMAIN,
+  JWT_SECRET,
+  TTL
+} from "../utils/secret";
 import { Roles } from "../models/enum/Roles";
 
 /**
@@ -19,7 +26,12 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       accessroles: ["Hotel"] // here need to write a method that handles the roles assignment
     };
 
-    console.log(req.session);
+    res.cookie(
+      "jwt",
+      jwt.sign({ name, password, today: Date.now() }, <string>JWT_SECRET, {
+        expiresIn: TTL
+      })
+    );
 
     return await res
       .status(200)
@@ -45,15 +57,20 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
       return await req.session.destroy(err => {
         if (err) throw err;
 
+        res.clearCookie("jwt");
+
         res.clearCookie(<string>SESSION_NAME, {
           domain: COOKIE_DOMAIN,
           path: COOKIE_PATH
         });
+
         res.send(`${user.name} logged out`);
       });
     } else {
       //no user stored in the session
-      throw new Error("Something went wrong. Could not find user object...");
+      res
+        .status(500)
+        .send(new Error("Something went wrong. Could not find user object..."));
     }
   } catch (error) {
     return await res.status(422).send(error);
@@ -68,16 +85,25 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
  * @description isloggedIn middleware checks if the current user session is valid
  */
 const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
-  const loginstatus =
-    req.session.user && req.session.user !== null && req.session.user !== {};
+  try {
+    let sessionStatus =
+      req.session.user && req.session.user !== null && req.session.user !== {};
+    let token = req.cookies.jwt || "";
+    let cookieTokenStatus = await jwt.verify(token, <string>JWT_SECRET);
 
-  return loginstatus
-    ? next()
-    : res
-        .status(401)
-        .send(
-          "You are unauthenticated! You must be logged in before you can try and access different routes!!!"
-        );
+    const loginstatus = cookieTokenStatus && sessionStatus;
+    return loginstatus
+      ? next()
+      : res
+          .status(401)
+          .send(
+            "You are unauthenticated! You must be logged in before you can try and access different routes!!!"
+          );
+  } catch (error) {
+    res
+      .status(500)
+      .send("There was a problem trying unauthenticating You!\n" + error);
+  }
 };
 
 /**

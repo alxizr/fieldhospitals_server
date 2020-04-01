@@ -73,8 +73,8 @@ export const createSecuredApp = () => {
   app.use(express.urlencoded({ extended: true }));
 
   // enable cors between client and server -- this must be here!!! do not move!!!
-  app.use(cors());
-  app.options("*", cors());
+  app.use(cors({ credentials: true }));
+  app.options("*", cors({ credentials: true }));
 
   // enable compression on all requests
   app.use(compression());
