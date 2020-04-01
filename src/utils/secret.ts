@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-const FILEPATH_ENV = ".env";
+const FILEPATH_ENV = ".env"; // <----- must be in root folder
 dotenv.config({ path: FILEPATH_ENV });
 
 export const ENVIRONMENT_PRODUCTION = "production";

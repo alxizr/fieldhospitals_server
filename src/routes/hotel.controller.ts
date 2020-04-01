@@ -13,10 +13,26 @@ export const hotels = Router();
 hotels
   .route("/excelfile")
 
-  .get(hotelsRepo.convertExcel2JSON())
-  .put(hotelsRepo.convertExcel2JSON())
-  .patch(hotelsRepo.convertExcel2JSON())
-  .post(hotelsRepo.convertExcel2JSON());
+  .get(
+    authRepo.isLoggedIn,
+    authRepo.hasRole([Roles.Hotel, Roles.HotelCanRead, Roles.HotelCanWrite]),
+    hotelsRepo.convertExcel2JSON()
+  )
+  .put(
+    authRepo.isLoggedIn,
+    authRepo.hasRole([Roles.Hotel, Roles.HotelCanRead, Roles.HotelCanWrite]),
+    hotelsRepo.convertExcel2JSON()
+  )
+  .patch(
+    authRepo.isLoggedIn,
+    authRepo.hasRole([Roles.Hotel, Roles.HotelCanRead, Roles.HotelCanWrite]),
+    hotelsRepo.convertExcel2JSON()
+  )
+  .post(
+    authRepo.isLoggedIn,
+    authRepo.hasRole([Roles.Hotel, Roles.HotelCanRead, Roles.HotelCanWrite]),
+    hotelsRepo.convertExcel2JSON()
+  );
 
 hotels
   .route("/:id")

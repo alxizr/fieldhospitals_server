@@ -19,6 +19,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       accessroles: ["Hotel"] // here need to write a method that handles the roles assignment
     };
 
+    console.log(req.session);
+
     return await res
       .status(200)
       .send(`${req.session!.user.name} successfully logged in!`);
