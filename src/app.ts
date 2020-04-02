@@ -13,8 +13,16 @@ if (cluster.isMaster) {
     cluster.fork();
   }
 
+  cluster.on("online", function(worker) {
+    console.log(
+      "Worker " + worker.id + " is online, process id: " + worker.process.pid
+    );
+  });
+
   cluster.on("exit", worker => {
-    console.log("Worker %d died :(", worker.id);
+    console.log(
+      "Worker " + worker.id + ", process id: " + worker.process.pid + " died"
+    );
     cluster.fork();
   });
 } else {

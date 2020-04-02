@@ -91,7 +91,6 @@ export const createSecuredApp = () => {
 export const startMyApp = async () => {
   console.log(
     `Run util method 'startMyApp'`,
-    `worker id: ${cluster.worker.id}`,
     `App ${APP_IDENTIFIER} server is live on port: ${ENV_APP_PORT_REST}`
   );
 
