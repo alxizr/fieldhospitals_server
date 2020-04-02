@@ -8,7 +8,7 @@ this is the server api for the fields hospital project
 
 #### MultiRoutes
 
-### Dev PORT: 3001
+#### Dev PORT: 3001;
 
 # TODO
 
@@ -17,6 +17,14 @@ this is the server api for the fields hospital project
         Documentation
         <ul>
             <li>setup Dcoumentation w/ Swagger API</li>
+        </ul>
+    </li>
+    <br />
+    <li>
+        Cluster
+        <ul>
+            <strike><li>create cluster for Node js Express </li></strike>
+            <strike><li>run Node js Express inside cluster with multi cpus</li></strike>
         </ul>
     </li>
     <br />
@@ -52,7 +60,8 @@ this is the server api for the fields hospital project
             <li><strike>Create class models</strike></li>
             <li>Configure class models</li>
             <li>Create Mongoose Schemas</li>
-            <li>Create Mongoose static and memeber methods</li>
+            <li>Create Mongoose static methods</li>
+            <li>Create Mongoose memeber methods</li>
             <li>Create Mongoose collections ref</li>
         </ul>
     </li>

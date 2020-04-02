@@ -1,3 +1,4 @@
+import cluster from "cluster";
 import express from "express";
 import connectStore from "connect-mongo";
 import { connection, connect } from "mongoose";
@@ -90,6 +91,7 @@ export const createSecuredApp = () => {
 export const startMyApp = async () => {
   console.log(
     `Run util method 'startMyApp'`,
+    `worker id: ${cluster.worker.id}`,
     `App ${APP_IDENTIFIER} server is live on port: ${ENV_APP_PORT_REST}`
   );
 
